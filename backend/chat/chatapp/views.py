@@ -5,16 +5,15 @@ from django.core.cache import cache
 
 
 def lobby(request):
-    return render(request, "chatapp/home.html")
+    if not request.session.session_key:
+        request.session.create()
+    return render(
+        request, "chatapp/home.html", {"session_id": request.session.session_key}
+    )
 
 
-def room(request, room_name):
-    cache.get_or_set(room_name, 1)
-    print(room_name)
+def room(request):
     return render(
         request,
         "chatapp/room.html",
-        {
-            "room": {"name": room_name},
-        },
     )

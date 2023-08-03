@@ -19,5 +19,5 @@ from . import views
 
 urlpatterns = [
     path("", views.lobby),
-    path("<str:room_name>/", views.room, name="chat-room"),
+    path("connect/", views.room, name="chat-room"),
 ]
